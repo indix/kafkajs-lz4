@@ -1,7 +1,6 @@
 # kafkajs-lz4
 
-[![Build Status](https://img.shields.io/travis/indix/kafkajs-lz4/master.svg?style=flat-square)](https://travis-ci.org/indix/kafkajs-lz4) ![TypeScript](https://img.shields.io/badge/typescript-3.1-blue.svg?style=flat-square)
-
+[![Build Status](https://img.shields.io/travis/indix/kafkajs-lz4/master.svg?style=flat-square)](https://travis-ci.org/indix/kafkajs-lz4) [![NPM Version](https://img.shields.io/npm/v/kafkajs-lz4.svg/?style=flat-square)](https://www.npmjs.com/package/kafkajs-lz4) ![](https://img.shields.io/badge/typescript-3.1-blue.svg?style=flat-square)
 
 TypeScript-ready [lz4](https://www.npmjs.com/package/lz4) compression codec for [KafkaJS](https://www.npmjs.com/package/kafkajs).
 
