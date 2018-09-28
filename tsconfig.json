@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "outDir": "./lib/",
+        "inlineSourceMap": false,
+        "noImplicitAny": false,
+        "strictNullChecks": true,
+        "strict": true,
+        "strictFunctionTypes": true,
+        "alwaysStrict": true,
+        "declaration": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "es2017", // For > Node 8.x
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "types": [
+            "node"
+        ]
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "kafkajs-lz4",
+  "version": "1.0.0",
+  "description": "LZ4 compression codec for the KafkaJS library",
+  "keywords": [
+    "kafka",
+    "kafkajs",
+    "compression",
+    "lz4",
+    "codec"
+  ],
+  "homepage": "https://oss.indix.com/",
+  "bugs": {
+    "url": "https://github.com/indix/kafkajs-lz4/issues",
+    "email": "opensource@indix.com"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "GP",
+    "email": "gp@indix.com",
+    "url": "https://github.com/paambaati"
+  },
+  "files": [
+    "lib/**"
+  ],
+  "main": "lib/index.js",
+  "repository": "https://github.com/indix/kafkajs-lz4",
+  "scripts": {
+    "build": "tsc",
+    "test": "ts-node test/*.test.ts",
+    "lint": "tslint --project './tsconfig.json' --format verbose",
+    "lint:test": "tslint --project './tsconfig.test.json' --format verbose",
+    "precommit": "npm run lint && npm run lint:test",
+    "prepublishOnly": "rm -rf lib/ && npm run build"
+  },
+  "dependencies": {
+    "lz4": "0.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.11.2",
+    "@types/tape": "^4.2.32",
+    "tape": "^4.9.1",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.0",
+    "typescript": "3.1.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
