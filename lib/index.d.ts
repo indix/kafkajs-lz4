@@ -11,7 +11,8 @@ export interface LZ4Options {
      */
     highCompression?: boolean;
     /**
-     * If this flag is set to `true`, blocks are independent. If `false`, each block depends on previous ones (up to LZ4 window size, which is 64 KB).
+     * If this flag is set to `true`, blocks are independent.
+     * If `false`, each block depends on previous ones (up to LZ4 window size, which is 64 KB).
      * In such case, it is necessary to decode all blocks in sequence.
      * Block dependency improves compression ratio, especially for small blocks.
      * On the other hand, it makes direct jumps or multi-threaded decoding impossible.
@@ -55,12 +56,14 @@ export default class LZ4Codec {
     private compress;
     private decompress;
     /**
-     * KafkaJS CompressionType-compatible codec.
+     * KafkaJS CompressionType-compatible LZ4 codec methods.
      * @memberof LZ4Codec
      * @returns {object} KafkaJS codec.
      */
     codec: {
-        compress: (encoder: any) => Promise<Buffer>;
+        compress: (encoder: {
+            buffer: Buffer;
+        }) => Promise<Buffer>;
         decompress: (buffer: Buffer) => Promise<Buffer>;
     };
 }
