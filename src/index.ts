@@ -56,7 +56,7 @@ export default class LZ4Codec {
     constructor(private options?: LZ4Options) { }
 
     private async compress(encoder: { buffer: Buffer }): Promise<Buffer> {
-        return await new Promise<Buffer>(resolve => { // TODO do we need await on new Promise()?
+        return await new Promise<Buffer>(resolve => {
             const compressedBuffer: Buffer = encode(encoder.buffer, this.options);
             return resolve(compressedBuffer);
         });
