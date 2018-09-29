@@ -100,9 +100,8 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
     });
 
     const message = messages.pop() || { key: null, value: null };
-    t.equal(message.key, fixture.message.key);
-    t.equal(message.value, fixture.message.value);
-
+    t.true(message.key.equals(fixture.message.key), 'Key should match.');
+    t.true(message.value.equals(fixture.message.value), 'Value should match.');
     await consumer.disconnect();
     t.end();
 });
