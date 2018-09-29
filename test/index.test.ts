@@ -9,7 +9,9 @@ import { parse } from 'url';
  * Workaround for docker-machine.
  */
 function findKafkaLocation() {
-    const machine = process.env['DOCKER_HOST'] || 'tcp://localhost';
+    const machine = process.env['DOCKER_HOST']
+    || process.env['HOST_IP'] && `tcp://${process.env['HOST_IP']}`
+    || 'tcp://localhost';
     return parse(machine).hostname;
 }
 
