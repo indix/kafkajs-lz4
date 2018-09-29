@@ -84,10 +84,16 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
     await producer.send({
         topic: fixture.topicName,
         compression: CompressionTypes.LZ4,
-        messages: [<KafkaMessage>fixture.message],
+        messages: [fixture.message],
     });
+    await producer.disconnect();
 
     const messages: KafkaMessage[] = [];
+    await consumer.connect();
+    await consumer.subscribe({
+        topic: fixture.topicName,
+        fromBeginning: true,
+    });
     consumer.run({ eachMessage: ({ message }) => messages.push(message as KafkaMessage) });
     await waitFor(() => messages.length >= 1, {
         maxWait: 60000,
@@ -97,7 +103,6 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
     t.equal(message.key, fixture.message.key);
     t.equal(message.value, fixture.message.value);
 
-    await producer.disconnect();
     await consumer.disconnect();
     t.end();
 });
