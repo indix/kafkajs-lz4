@@ -329,6 +329,18 @@ js-yaml@^3.7.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+kafkajs@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/kafkajs/-/kafkajs-1.3.1.tgz#a8feaef04d81e39f1dd643ff6df17bff477aab98"
+  integrity sha512-ghtoE8+Hdua0t5muqRrQQ0g25gJZaR81YlpffIK3zovEZ08KNvIVqcOt7Lp3OIR68jc+y79LhvgG10oqfgaKlQ==
+  dependencies:
+    long "^4.0.0"
+
+long@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
+  integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
+
 lz4@0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/lz4/-/lz4-0.6.0.tgz#1981bb7cd351cd4771395b2a2d9c8d32293567dc"
