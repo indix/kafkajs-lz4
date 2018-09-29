@@ -5,30 +5,6 @@ import waitFor from 'kafkajs/src/utils/waitFor';
 import { parse } from 'url';
 
 /**
- * Wraps a promise in a timeout, allowing the promise
- * to reject if not resolve with a specific period of time.
- * @param {number} Milliseconds to wait before rejecting promise if not resolved.
- * @param {promise} Promise to watch.
- */
-function promiseTimeout(ms: number, promise: Promise<any>) {
-    return new Promise((resolve, reject) => {
-        // create a timeout to reject promise if not resolved
-        const timer = setTimeout(() => {
-            reject(new Error('Promise timed out!'));
-        }, ms);
-        promise
-            .then((res) => {
-                clearTimeout(timer);
-                resolve(res);
-            })
-            .catch((err) => {
-                clearTimeout(timer);
-                reject(err);
-            });
-    });
-}
-
-/**
  * Find docker host address.
  * Workaround for docker-machine.
  */
@@ -95,7 +71,7 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
     const kafka = new Kafka({
         brokers: [`${findKafkaLocation()}:9092`],
         clientId: 'kafkajs-lz4',
-        logLevel: logLevel.NOTHING,
+        logLevel: process.env['KAFKAJS_LOG_LEVEL'] || logLevel.NOTHING,
     });
     const producer = kafka.producer();
     const consumer = kafka.consumer({ groupId: 'lz4-group' });
@@ -111,7 +87,7 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
 
     const messages: KafkaMessage[] = [];
     consumer.run({ eachMessage: ({ message }) => messages.push(message as KafkaMessage) });
-    promiseTimeout(180000, await waitFor(() => messages.length >= 1)).catch(t.fail);
+    await waitFor(() => messages.length >= 1);
 
     const message = messages.pop() || { key: null, value: null };
     t.equal(message.key, fixture.message.key);
