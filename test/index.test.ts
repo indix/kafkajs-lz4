@@ -64,7 +64,7 @@ test('👩🏻‍🔬 Should set options.', t => {
 test('👩🏻‍🔬 Should compress and decompress buffers (duh).', async t => {
     t.plan(3);
     const fixture = 'lol';
-    const lz4Codec = new LZ4Codec().codec;
+    const lz4Codec = new LZ4Codec().codec();
     t.is(typeof (lz4Codec.compress), 'function', 'compress() should be a function.');
     t.is(typeof (lz4Codec.decompress), 'function', 'decompress() should be a function.');
     const encoded = await lz4Codec.compress({
@@ -99,7 +99,7 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
     });
     const producer = kafka.producer();
     const consumer = kafka.consumer({ groupId: 'lz4-group' });
-    const lz4Codec = new LZ4Codec().codec;
+    const lz4Codec = new LZ4Codec().codec();
     CompressionCodecs[CompressionTypes.LZ4] = lz4Codec;
 
     await producer.connect();
