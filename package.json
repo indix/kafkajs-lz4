@@ -1,6 +1,6 @@
 {
   "name": "kafkajs-lz4",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "LZ4 compression codec for the KafkaJS library",
   "keywords": [
     "kafka",
