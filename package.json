@@ -14,7 +14,7 @@
     "url": "https://github.com/indix/kafkajs-lz4/issues",
     "email": "opensource@indix.com"
   },
-  "license": "Apache-2.0",
+  "license": "MIT",
   "author": {
     "name": "GP",
     "email": "gp@indix.com",
