@@ -14,5 +14,6 @@ install:
 
 script:
   - yarn lint
+  - yarn lint:test
   - docker-compose pull
   - yarn test
