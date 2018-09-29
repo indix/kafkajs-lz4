@@ -6,10 +6,6 @@ node_js:
   - '8'
   - '10'
 
-env:
-  global:
-    - KAFKAJS_LOG_LEVEL: DEBUG
-
 services:
   - docker
 
