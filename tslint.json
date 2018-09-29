@@ -3,6 +3,7 @@
     "rules": {
         "ter-indent": 4,
         "ter-arrow-parens": false,
-        "import-name": false
+        "import-name": false,
+        "align": false
     }
 }
