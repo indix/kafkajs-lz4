@@ -1,8 +1,12 @@
 {
     "extends": "./tsconfig",
     "compilerOptions": {
-        "outDir": "/dev/null",
+        "outDir": "./test/build",
+        "declaration": false
     },
+    "exclude": [
+        "src/**"
+    ],
     "include": [
         "test/*.test.ts"
     ]
