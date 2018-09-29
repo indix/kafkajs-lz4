@@ -89,7 +89,9 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
 
     const messages: KafkaMessage[] = [];
     consumer.run({ eachMessage: ({ message }) => messages.push(message as KafkaMessage) });
-    await waitFor(() => messages.length >= 1);
+    await waitFor(() => messages.length >= 1, {
+        maxWait: 60000,
+    });
 
     const message = messages.pop() || { key: null, value: null };
     t.equal(message.key, fixture.message.key);
