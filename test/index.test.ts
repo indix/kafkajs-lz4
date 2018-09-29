@@ -105,7 +105,7 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
     await producer.connect();
     await producer.send({
         topic: fixture.topicName,
-        compression: CompressionTypes.Snappy,
+        compression: CompressionTypes.LZ4,
         messages: [<KafkaMessage>fixture.message],
     });
 
