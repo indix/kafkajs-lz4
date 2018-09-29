@@ -1,8 +1,18 @@
 language: node_js
+dist: bionic
+sudo: required
+
 node_js:
   - '8'
   - '10'
 
+services:
+  - docker
+
+install:
+  - yarn install
+
 script:
-  - npm run lint
-  - npm run test
+  - yarn lint
+  - docker-compose pull
+  - yarn test

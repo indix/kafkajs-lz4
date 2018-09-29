@@ -1,0 +1,25 @@
+version: '2'
+services:
+  zk:
+    image: wurstmeister/zookeeper:latest
+    ports:
+      - "2181:2181"
+  kafka:
+    labels:
+      - "project-name=kafkajs-lz4"
+    image: wurstmeister/kafka:2.11-2.0.0
+    ports:
+      - "9092:9092"
+    links:
+      - zk
+    environment:
+      KAFKA_BROKER_ID: 0
+      KAFKA_ADVERTISED_HOST_NAME: ${HOST_IP}
+      KAFKA_ZOOKEEPER_CONNECT: zk:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_LISTENERS: "PLAINTEXT://:9092"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://${HOST_IP}:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_CREATE_TOPICS: "topic-test:1:1"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
