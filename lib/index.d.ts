@@ -59,7 +59,7 @@ export default class LZ4Codec {
      * KafkaJS CompressionType-compatible LZ4 codec.
      * @memberof LZ4Codec
      */
-    codec: {
+    codec: () => {
         compress: (encoder: {
             buffer: Buffer;
         }) => Promise<Buffer>;
