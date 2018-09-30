@@ -73,10 +73,12 @@ export default class LZ4Codec {
      * KafkaJS CompressionType-compatible LZ4 codec.
      * @memberof LZ4Codec
      */
-    public codec = {
-        compress: this.compress,
-        decompress: this.decompress,
-    };
+    public codec = () => {
+        return {
+            compress: this.compress,
+            decompress: this.decompress,
+        };
+    }
 }
 
 module.exports = LZ4Codec;
