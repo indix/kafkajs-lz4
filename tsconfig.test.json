@@ -1,8 +1,7 @@
 {
     "extends": "./tsconfig",
     "compilerOptions": {
-        "outDir": "./test/build",
-        "declaration": false
+        "outDir": "/dev/null"
     },
     "exclude": [
         "src/**"
