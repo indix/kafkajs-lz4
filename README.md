@@ -16,9 +16,7 @@ $ yarn install kafkajs-lz4
 import { CompressionTypes, CompressionCodecs } from 'kafkajs';
 import LZ4Codec from 'kafkajs-lz4';
 
-const lz4Codec = new LZ4Codec().codec;
-
-CompressionCodecs[CompressionTypes.LZ4] = () => lz4Codec;
+CompressionCodecs[CompressionTypes.LZ4] = new LZ4Codec().codec;
 ```
 
 ## Options
@@ -34,5 +32,5 @@ const lz4Codec = new LZ4Codec({
     blockMaxSize: 26214400
 }).codec;
 
-CompressionCodecs[CompressionTypes.LZ4] = () => lz4Codec;
+CompressionCodecs[CompressionTypes.LZ4] = lz4Codec;
 ```
