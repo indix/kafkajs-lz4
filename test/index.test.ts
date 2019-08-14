@@ -73,7 +73,7 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
     const kafka = new Kafka({
         brokers: [`${findKafkaLocation()}:9092`],
         clientId: 'kafkajs-lz4',
-        logLevel: process.env['KAFKAJS_LOG_LEVEL'] || logLevel.NOTHING,
+        logLevel: logLevel.NOTHING,
     });
     const producer = kafka.producer();
     const consumer = kafka.consumer({ groupId: 'lz4-group' });
@@ -94,6 +94,7 @@ test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', asyn
         topic: fixture.topicName,
         fromBeginning: true,
     });
+    // @ts-ignore
     consumer.run({ eachMessage: ({ message }) => messages.push(message as KafkaMessage) });
     await waitFor(() => messages.length >= 1, {
         maxWait: 60000,
