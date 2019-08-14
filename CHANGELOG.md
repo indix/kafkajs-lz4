@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2019-08-14
+### Fixed
+- Node.js v12 compatibility — via [`#1`](https://github.com/indix/kafkajs-lz4/pull/1). Thanks @ankon!
+
 ## [1.1.0] - 2018-09-30
 ### Changed
 - Updated return type for `codec()` from class property to function.
