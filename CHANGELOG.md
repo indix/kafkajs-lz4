@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.2.1] - 2019-08-14
 ### Fixed
-- TS errors in tests — via [`688a42c`](https://github.com/indix/kafkajs-lz4/commit/688a42c57523cd5f4116755aae0c30a2dd758688). Thanks @ankon!
+- TS errors in tests — via [`688a42c`](https://github.com/indix/kafkajs-lz4/commit/688a42c57523cd5f4116755aae0c30a2dd758688).
 
 ## [1.2.0] - 2019-08-14
 ### Fixed
