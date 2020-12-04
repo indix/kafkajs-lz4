@@ -2,18 +2,14 @@ name: Test
 on:
   push:
     branches:
+      - main
       - master
     tags:
       - '!*' # Do not execute on tags
-    paths:
-      - src/*
-      - test/*
-      - scripts/*
-      - '*.json'
-      - yarn.lock
   pull_request:
-    paths:
-      - '!*.MD'
+    branches:
+      - main
+      - master
 jobs:
   test:
     strategy:
