@@ -10,9 +10,10 @@ import type { LZ4Options } from '../src/index';
  * Workaround for docker-machine.
  */
 function findKafkaLocation() {
-    const machine = process.env['DOCKER_HOST']
-    || process.env['HOST_IP'] && `tcp://${process.env['HOST_IP']}`
-    || 'tcp://localhost';
+    const machine =
+        process.env['DOCKER_HOST'] ||
+        (process.env['HOST_IP'] && `tcp://${process.env['HOST_IP']}`) ||
+        'tcp://localhost';
     return parse(machine).hostname;
 }
 
@@ -21,32 +22,32 @@ function findKafkaLocation() {
  */
 
 type KafkaMessage = {
-    key: Buffer,
-    value: Buffer,
+    key: Buffer;
+    value: Buffer;
 };
 
 /**
  * Tests.
  */
 
-test('👩🏻‍🔬 Should set options.', t => {
+test('👩🏻‍🔬 Should set options.', (t) => {
     t.plan(1);
     const options: LZ4Options = {
         preferences: {
             compressionLevel: 12,
-        }
+        },
     };
     const lz4 = new LZ4Codec(options);
     t.deepEqual(lz4['options'], options, 'options should be transparently passed.');
     t.end();
 });
 
-test('👩🏻‍🔬 Should compress and decompress buffers (duh).', async t => {
+test('👩🏻‍🔬 Should compress and decompress buffers (duh).', async (t) => {
     t.plan(3);
     const fixture = 'lol🤣';
     const lz4Codec = new LZ4Codec().codec;
-    t.is(typeof (lz4Codec().compress), 'function', 'compress() should be a function.');
-    t.is(typeof (lz4Codec().decompress), 'function', 'decompress() should be a function.');
+    t.is(typeof lz4Codec().compress, 'function', 'compress() should be a function.');
+    t.is(typeof lz4Codec().decompress, 'function', 'decompress() should be a function.');
     const encoded = await lz4Codec().compress({
         buffer: Buffer.from(fixture),
     });
@@ -55,21 +56,22 @@ test('👩🏻‍🔬 Should compress and decompress buffers (duh).', async t =>
     t.end();
 });
 
-test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', async t => {
+test('👩🏻‍🔬 Should compress and decompress real Kafka messages.', async (t) => {
     t.plan(2);
     const fixture = {
         topicName: 'topic-test',
         message: {
             key: Buffer.from('lorem'),
             value: Buffer.from(
-                'Lorem ipsum dolor sit amet, consectetur adipisicing elit,'
-                + 'sed do eiusmod tempor incididunt ut labore et dolore magna '
-                + 'aliqua. Ut enim ad minim veniam, quis nostrud exercitation'
-                + 'ullamco laboris nisi ut aliquip ex ea commodo consequat. '
-                + 'Duis aute irure dolor in reprehenderit in voluptate velit '
-                + 'esse cillum dolore eu fugiat nulla pariatur. Excepteur '
-                + 'sint occaecat cupidatat non proident, sunt in culpa qui '
-                + 'officia deserunt mollit anim id est laborum'),
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit,' +
+                    'sed do eiusmod tempor incididunt ut labore et dolore magna ' +
+                    'aliqua. Ut enim ad minim veniam, quis nostrud exercitation' +
+                    'ullamco laboris nisi ut aliquip ex ea commodo consequat. ' +
+                    'Duis aute irure dolor in reprehenderit in voluptate velit ' +
+                    'esse cillum dolore eu fugiat nulla pariatur. Excepteur ' +
+                    'sint occaecat cupidatat non proident, sunt in culpa qui ' +
+                    'officia deserunt mollit anim id est laborum'
+            ),
         },
     };
     const kafka = new Kafka({

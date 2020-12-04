@@ -27,7 +27,7 @@ export interface LZ4Options {
          * @default 0
          */
         blockChecksumFlag?: number;
-    },
+    };
     preferences?: {
         /**
          * Compression level - number 0 to 16.
@@ -50,17 +50,17 @@ export interface LZ4Options {
          * @default 1
          */
         favorDecSpeed?: number;
-    },
-};
+    };
+}
 
 /**
  * LZ4 Compression codec for the [KafkaJS](https://github.com/tulios/kafkajs) library.
  */
 export default class LZ4Codec {
-    constructor(private options?: LZ4Options) { }
+    constructor(private options?: LZ4Options) {}
 
     private async compress(encoder: { buffer: Buffer }): Promise<Buffer> {
-        return await new Promise<Buffer>(resolve => {
+        return await new Promise<Buffer>((resolve) => {
             return lz4Ready.then((lz4) => {
                 const lz4js = lz4.lz4js;
                 const compressedBuffer: Buffer = lz4js.compress(encoder.buffer, {
@@ -76,7 +76,7 @@ export default class LZ4Codec {
     }
 
     private async decompress(buffer: Buffer): Promise<Buffer> {
-        return await new Promise<Buffer>(resolve => {
+        return await new Promise<Buffer>((resolve) => {
             return lz4Ready.then((lz4) => {
                 const lz4js = lz4.lz4js;
                 const decompressedBuffer: Buffer = lz4js.decompress(buffer);
@@ -94,7 +94,7 @@ export default class LZ4Codec {
             compress: this.compress,
             decompress: this.decompress,
         };
-    }
+    };
 }
 
 module.exports = LZ4Codec;
