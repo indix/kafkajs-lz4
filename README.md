@@ -4,10 +4,12 @@
 
 TypeScript-ready [lz4](https://www.npmjs.com/package/lz4) compression codec for [KafkaJS](https://www.npmjs.com/package/kafkajs).
 
+ℹ️ Requires Node v10 or above to work.
+
 ## Install
 
 ```bash
-$ yarn install kafkajs-lz4
+$ yarn add kafkajs-lz4
 ```
 
 ## Usage
@@ -21,15 +23,17 @@ CompressionCodecs[CompressionTypes.LZ4] = new LZ4Codec().codec;
 
 ## Options
 
-All options are transparently passed on to the [lz4 library's synchronous encoding options](https://www.npmjs.com/package/lz4#synchronous-encoding).
+All options are transparently passed on to the [lz4-asm library's compress options](https://www.npmjs.com/package/lz4-asm#lz4compresssource-options).
 
 ### Example
 
-To allow encoding Kafka messages of up to 25 MB in size —
+To set the highest level of compression for your Kafka messages —
 
 ```typescript
 const lz4Codec = new LZ4Codec({
-    blockMaxSize: 26214400
+    preferences: {
+        compressionLevel: 16
+    }
 }).codec;
 
 CompressionCodecs[CompressionTypes.LZ4] = lz4Codec;
