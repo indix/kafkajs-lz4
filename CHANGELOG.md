@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ⚡️ Replace core dependency [`lz4`](https://www.npmjs.com/package/lz4) with the much better maintained [`lz4-asm`](https://www.npmjs.com/package/lz4-asm) library.
 - Upgraded all dependencies (including running tests on Kafka v2.5.0)
 - Replace Travis CI with Github Actions.
+- Migrate to ESLint from TSLint (now that the TSLint project is deprecated).
 
 ## [1.2.1] - 2019-08-14
 ### Fixed
