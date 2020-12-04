@@ -1,0 +1,35 @@
+name: test
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '!*' # Do not execute on tags
+    paths:
+      - src/*
+      - test/*
+      - scripts/*
+      - '*.json'
+      - yarn.lock
+  pull_request:
+    paths:
+      - '!*.MD'
+jobs:
+  test:
+    strategy:
+      matrix:
+        platform: [ ubuntu-latest ]
+        node: [ '14', '12' ]
+    name: test/node ${{ matrix.node }}/${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
+      with:
+        node-version: ${{ matrix.node }}
+    - run: npm install -g yarn
+    - run: yarn install
+    - run: yarn run lint
+    - run: yarn run lint:test
+    - run: docker-compose pull
+    - run: yarn run test
