@@ -9,7 +9,7 @@ TypeScript-ready [lz4](https://www.npmjs.com/package/lz4) compression codec for 
 ## Install
 
 ```bash
-$ yarn install kafkajs-lz4
+$ yarn add kafkajs-lz4
 ```
 
 ## Usage
