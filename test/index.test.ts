@@ -3,6 +3,7 @@ import LZ4Codec from '../src/index';
 import { Kafka, CompressionTypes, CompressionCodecs, logLevel } from 'kafkajs';
 import waitFor from 'kafkajs/src/utils/waitFor';
 import { parse } from 'url';
+import type { LZ4Options } from '../src/index';
 
 /**
  * Find docker host address.
@@ -30,9 +31,10 @@ type KafkaMessage = {
 
 test('👩🏻‍🔬 Should set options.', t => {
     t.plan(1);
-    const options = {
-        blockMaxSize: 1,
-        highCompression: true,
+    const options: LZ4Options = {
+        preferences: {
+            compressionLevel: 12,
+        }
     };
     const lz4 = new LZ4Codec(options);
     t.deepEqual(lz4['options'], options, 'options should be transparently passed.');
@@ -41,7 +43,7 @@ test('👩🏻‍🔬 Should set options.', t => {
 
 test('👩🏻‍🔬 Should compress and decompress buffers (duh).', async t => {
     t.plan(3);
-    const fixture = 'lol';
+    const fixture = 'lol🤣';
     const lz4Codec = new LZ4Codec().codec;
     t.is(typeof (lz4Codec().compress), 'function', 'compress() should be a function.');
     t.is(typeof (lz4Codec().decompress), 'function', 'decompress() should be a function.');

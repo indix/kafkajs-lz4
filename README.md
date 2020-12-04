@@ -21,15 +21,17 @@ CompressionCodecs[CompressionTypes.LZ4] = new LZ4Codec().codec;
 
 ## Options
 
-All options are transparently passed on to the [lz4 library's synchronous encoding options](https://www.npmjs.com/package/lz4#synchronous-encoding).
+All options are transparently passed on to the [lz4-asm library's compress options](https://www.npmjs.com/package/lz4-asm#lz4compresssource-options).
 
 ### Example
 
-To allow encoding Kafka messages of up to 25 MB in size —
+To set the highest level of compression for your Kafka messages —
 
 ```typescript
 const lz4Codec = new LZ4Codec({
-    blockMaxSize: 26214400
+    preferences: {
+        compressionLevel: 16
+    }
 }).codec;
 
 CompressionCodecs[CompressionTypes.LZ4] = lz4Codec;
