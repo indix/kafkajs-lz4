@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         platform: [ ubuntu-18.04 ]
-        node: [ '14', '12' ]
+        node: [ '14', '12', '10' ]
     name: test/node ${{ matrix.node }}/${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
     steps:
