@@ -1,51 +1,53 @@
 /// <reference types="node" />
 export interface LZ4Options {
-    /**
-     * Chunk size (in bytes) to use.
-     * @default 4194304
-     */
-    blockMaxSize?: number;
-    /**
-     * Use high compression.
-     * @default false
-     */
-    highCompression?: boolean;
-    /**
-     * If this flag is set to `true`, blocks are independent.
-     * If `false`, each block depends on previous ones (up to LZ4 window size, which is 64 KB).
-     * In such case, it is necessary to decode all blocks in sequence.
-     * Block dependency improves compression ratio, especially for small blocks.
-     * On the other hand, it makes direct jumps or multi-threaded decoding impossible.
-     * See https://github.com/lz4/lz4/wiki/lz4_Frame_format.md
-     * @readonly
-     * @default true
-     */
-    blockIndependence?: boolean;
-    /**
-     * Add compressed blocks checksum.
-     * @default false
-     */
-    blockChecksum?: boolean;
-    /**
-     * Add full LZ4 stream size.
-     * @default false
-     */
-    streamSize?: boolean;
-    /**
-     * Add full LZ4 stream checksum.
-     * @default true
-     */
-    streamChecksum?: boolean;
-    /**
-     * Use dictionary.
-     * @default false
-     */
-    dict?: boolean;
-    /**
-     * Dictionary ID.
-     * @default 0
-     */
-    dictId?: number;
+    frameInfo?: {
+        /**
+         * Number 4 to 7.
+         * Available sizes: { 4: "64KB", 5: "256KB", 6: "1MB", 7: "4MB" }
+         */
+        blockSizeID?: number;
+        /**
+         * Set to 0 for no checksum.
+         * Set to 1 for terminating frame with 32-bit checksum of decompressed data.
+         * @default 0
+         */
+        contentChecksumFlag?: number;
+        /**
+         * Dictionary ID, sent by compressor to help decoder select correct dictionary.
+         * Set to 0 for no dictionary.
+         * @default 0
+         */
+        dictID?: number;
+        /**
+         * Each block will followed by a checksum of block's compressed data.
+         * Set to 0 for no checksum.
+         * @default 0
+         */
+        blockChecksumFlag?: number;
+    };
+    preferences?: {
+        /**
+         * Compression level - number 0 to 16.
+         * Set to 0 (min) for faster usage but zero compression.
+         * Set to 16 (max) for slower usage but best compression.
+         * @default 0
+         */
+        compressionLevel?: number;
+        /**
+         * Always flush; reduces usage of internal buffers.
+         * Set to 0 for disabling flush.
+         * Set to 1 for always flush.
+         * @default 1
+         */
+        autoFlush?: number;
+        /**
+         * Parser favors decompression speed vs compression ratio.
+         * Only works for high compression modes.
+         * Set to 0 to disable.
+         * @default 1
+         */
+        favorDecSpeed?: number;
+    };
 }
 /**
  * LZ4 Compression codec for the [KafkaJS](https://github.com/tulios/kafkajs) library.
