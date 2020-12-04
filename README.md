@@ -4,6 +4,8 @@
 
 TypeScript-ready [lz4](https://www.npmjs.com/package/lz4) compression codec for [KafkaJS](https://www.npmjs.com/package/kafkajs).
 
+ℹ️ Requires Node v10 or above to work.
+
 ## Install
 
 ```bash
