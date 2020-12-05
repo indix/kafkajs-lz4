@@ -1,4 +1,4 @@
-const lz4init = require('lz4-asm');
+import lz4init from 'lz4-asm';
 const lz4Module = {};
 const lz4Ready = lz4init(lz4Module);
 
@@ -60,29 +60,19 @@ export default class LZ4Codec {
     constructor(private options?: LZ4Options) {}
 
     private async compress(encoder: { buffer: Buffer }): Promise<Buffer> {
-        return await new Promise<Buffer>((resolve) => {
-            return lz4Ready.then((lz4) => {
-                const lz4js = lz4.lz4js;
-                const compressedBuffer: Buffer = lz4js.compress(encoder.buffer, {
-                    ...this.options,
-                    frameInfo: {
-                        ...this.options?.frameInfo,
-                        blockMode: 1, // Turning off block mode won't work with KafkaJS.
-                    },
-                });
-                return resolve(compressedBuffer);
-            });
+        const { lz4js } = await lz4Ready;
+        return lz4js.compress(encoder.buffer, {
+            ...this.options,
+            frameInfo: {
+                ...this.options?.frameInfo,
+                blockMode: 1, // Turning off block mode won't work with KafkaJS.
+            },
         });
     }
 
     private async decompress(buffer: Buffer): Promise<Buffer> {
-        return await new Promise<Buffer>((resolve) => {
-            return lz4Ready.then((lz4) => {
-                const lz4js = lz4.lz4js;
-                const decompressedBuffer: Buffer = lz4js.decompress(buffer);
-                return resolve(decompressedBuffer);
-            });
-        });
+        const { lz4js } = await lz4Ready;
+        return lz4js.decompress(buffer);
     }
 
     /**
